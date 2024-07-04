@@ -52,4 +52,9 @@ class Home extends BaseController
 
         return view('index', ['local_data' => $assoc, 'public_data' => $public_info]);
     }
+
+    public function privacy() 
+    {
+        return view('privacy');
+    }
 }
