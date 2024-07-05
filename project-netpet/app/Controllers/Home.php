@@ -7,11 +7,12 @@ class Home extends BaseController
     public function index()
     {
         $os = PHP_OS;
+
+        if ($os === 'WINNT') {
         
         ob_start();
         system('ipconfig');
         $info = ob_get_clean();
-        
         
         $adapters = [];
         $lines = explode("\n", str_replace("\r", "", $info));
@@ -27,9 +28,6 @@ class Home extends BaseController
                 $adapters[$currentAdapter][$key] = $value;
             }
         }
-
-        $jsonInfo = json_encode($adapters, JSON_PRETTY_PRINT);
-        $assoc = json_decode($jsonInfo, true);
 
         $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=d345c82037b14905843f101a253728d5');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -49,7 +47,9 @@ class Home extends BaseController
             'connection_type' => $json_data['connection_type']
         ];
 
-        return view('index', ['local_data' => $assoc, 'public_data' => $public_info]);
+        return view('index', ['local_data' => $adapters, 'public_data' => $public_info]);
+
+        }
     }
 
     public function privacy() 
