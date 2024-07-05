@@ -11,7 +11,7 @@
 <body>
 
 <div class="image-container text-center">
-    <a href="<?= base_url('/') ?>"><img src="<?= base_url('photos/logo.PNG') ?>"></a>
+    <a href="<?= base_url('/') ?>"><img src="<?= base_url('photos/logo.png') ?>"></a>
 </div>
     
 <div class="container text-white text-center">
