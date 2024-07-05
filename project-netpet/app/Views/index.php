@@ -36,7 +36,7 @@
                         <td><?= ($local_data['Wireless LAN adapter Wi-Fi']['IPv4 Address. . . . . . . . . . .']) ? $local_data['Wireless LAN adapter Wi-Fi']['IPv4 Address. . . . . . . . . . .'] : 'N/A' ?></td>
                     </tr>
                     <tr>
-                        <td>subnet_mask</td>
+                        <td>private_ip_subnet_mask_</td>
                         <td><?= ($local_data['Wireless LAN adapter Wi-Fi']['Subnet Mask . . . . . . . . . . .']) ? $local_data['Wireless LAN adapter Wi-Fi']['Subnet Mask . . . . . . . . . . .'] : 'N/A' ?></td>
                     </tr>
                     <tr>

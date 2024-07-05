@@ -15,7 +15,7 @@
 </div>
     
 <div class="container text-white text-center">
-    <h1>Privacy Policy</h1>
+    <h1><u>Privacy Policy</u></h1>
 </div>
 
 <div class="container text-white text-center mt-4">

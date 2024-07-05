@@ -6,8 +6,7 @@ class Home extends BaseController
 {
     public function index()
     {
-    
-        $os = PHP_OS; //in development
+        $os = PHP_OS;
         
         ob_start();
         system('ipconfig');
