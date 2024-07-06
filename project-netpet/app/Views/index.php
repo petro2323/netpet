@@ -14,9 +14,7 @@
     <a href="<?= base_url('/') ?>"><img src="<?= base_url('photos/logo.png') ?>"></a>
 </div>
 
-<?php if (PHP_OS === 'WINNT') :?>
-
-    <div class="container mt-3 mb-2">
+<div class="container mt-3 mb-2">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <table class="table table-dark table-striped table-hover table-bordered">
@@ -65,64 +63,6 @@
     </div>
 </div>
 
-<?php endif; ?>
-
-<?php if (PHP_OS === 'Linux') :?>
-
-    <div class="container mt-3 mb-2">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <table class="table table-dark table-striped table-hover table-bordered">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Field</th>
-                        <th scope="col">Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>public_ip_address</td>
-                        <td><?= ($public_data['public_ip']) ? $public_data['public_ip'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>private_ip_address</td>
-                        <td><?= ($local_data['IP Address']) ? $local_data['IP Address'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>private_ip_subnet_mask_</td>
-                        <td><?= ($local_data['Subnet Mask']) ? $local_data['Subnet Mask'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>connection_type</td>
-                        <td><?= ($public_data['connection_type']) ? $public_data['connection_type'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>continent_name</td>
-                        <td><?= ($public_data['continent']) ? $public_data['continent'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>country_name</td>
-                        <td><?= ($public_data['country_name']) ? $public_data['country_name'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>city</td>
-                        <td><?= ($public_data['city']) ? $public_data['city'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>zipcode</td>
-                        <td><?= ($public_data['zipcode']) ? $public_data['zipcode'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>internet_service_provider</td>
-                        <td><?= ($public_data['organization']) ? $public_data['organization'] : 'N/A' ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<?php endif; ?>
 
 <div class="container text-center mt-3">
     <h1 class="display-6 text-white">Network Details For Device: <?= gethostname() ?></h1>

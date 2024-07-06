@@ -38,23 +38,11 @@ class Home extends BaseController
 
         } else if ($os === 'Linux') {
             
+            $command = "ip addr show \$default_iface | grep 'inet ' | grep -v '127.0.0.1' | awk '{print \$2}' | cut -d/ -f1";
+            
             ob_start();
-            system('ifconfig');
-            $info = ob_get_clean();
-
-            $adapters = [];
-            $lines = explode("\n", str_replace("\r", "", $info));
-            $currentAdapter = null;
-
-            foreach ($lines as $line) {
-                if (preg_match('/^(\S+): flags=/', trim($line), $matches)) {
-                    $currentAdapter = $matches[1];
-                    $adapters[$currentAdapter] = [];
-                } else if ($currentAdapter && preg_match('/^\s*inet\s+((10\.\d+\.\d+\.\d+)|(172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)|(192\.168\.\d+\.\d+))\s+netmask\s+(\d+\.\d+\.\d+\.\d+)/', trim($line), $matches)) {
-                    $adapters[$currentAdapter]['IP Address'] = $matches[1];
-                    $adapters[$currentAdapter]['Subnet Mask'] = $matches[6];
-                }
-            }
+            system($command);
+            $private_ip_address = ob_get_clean();
 
             $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=d345c82037b14905843f101a253728d5');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -74,7 +62,7 @@ class Home extends BaseController
                 'connection_type' => $json_data['connection_type']
             ];
             
-            return view('index', ['local_data' => $adapters[$currentAdapter], 'public_data' => $public_info]);
+            return view('index', ['local_data' => $private_ip_address, 'public_data' => $public_info]);
         } else {
             return view('index');
         }
