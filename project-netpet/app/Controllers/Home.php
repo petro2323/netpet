@@ -9,25 +9,12 @@ class Home extends BaseController
         $os = PHP_OS;
 
         if ($os === 'WINNT') {
-        
-            ob_start();
-            system('ipconfig');
-            $info = ob_get_clean();
             
-            $adapters = [];
-            $lines = explode("\n", str_replace("\r", "", $info));
-            $currentAdapter = null;
+            $command = 'powershell.exe -Command "(Get-NetRoute -DestinationPrefix \\"0.0.0.0/0\\" | Sort-Object -Property RouteMetric, InterfaceMetric | Select-Object -First 1 | Get-NetIPConfiguration).IPv4Address.IPAddress"';
 
-            foreach ($lines as $line) {
-                if (preg_match('/^(Ethernet adapter|Wireless LAN adapter|Tunnel adapter) (.+):$/', trim($line), $matches)) {
-                    $currentAdapter = $matches[1] . ' ' . $matches[2];
-                    $adapters[$currentAdapter] = [];
-                } else if ($currentAdapter && preg_match('/^\s*([^:]+)\s*:\s*(.+)$/', trim($line), $matches)) {
-                    $key = trim($matches[1]);
-                    $value = trim($matches[2]);
-                    $adapters[$currentAdapter][$key] = $value;
-                }
-            }
+            ob_start();
+            system($command);
+            $private_ip_address = ob_get_clean();
 
             $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=d345c82037b14905843f101a253728d5');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -47,7 +34,7 @@ class Home extends BaseController
                 'connection_type' => $json_data['connection_type']
             ];
 
-            return view('index', ['local_data' => $adapters, 'public_data' => $public_info]);
+            return view('index', ['local_data' => $private_ip_address, 'public_data' => $public_info]);
 
         } else if ($os === 'Linux') {
             
@@ -88,6 +75,8 @@ class Home extends BaseController
             ];
             
             return view('index', ['local_data' => $adapters[$currentAdapter], 'public_data' => $public_info]);
+        } else {
+            return view('index');
         }
     }
 
