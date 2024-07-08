@@ -21,8 +21,8 @@
 <div class="container text-white text-center mt-4">
     <p class="fs-5 fw-bold">What type of information does NetPet collect?</p>
     <p class="fs-5 mt-4">Our services are completely anonymous, and no information is logged.</p>
-    <p class="fs-5 fw-bold mt-4">I see my public and private IP addresses are displayed, is this somehow logged or stored?</p>
-    <p class="fs-5 mt-4">The IP addresses are displayed directly on the screen for your reference only and are not logged or stored in any way.</p>
+    <p class="fs-5 fw-bold mt-4">I see my public IP address is displayed, is this somehow logged or stored?</p>
+    <p class="fs-5 mt-4">The IP address is displayed directly on the screen for your reference only and is not logged or stored in any way.</p>
     <p class="fs-5 fw-bold mt-4">Does NetPet use cookies?</p>
     <p class="fs-5 mt-4">No.</p>
     <p class="fs-5 fw-bold mt-4">How can I be sure that my activity on NetPet remains private?</p>

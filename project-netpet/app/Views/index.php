@@ -24,50 +24,15 @@
                         <th scope="col">Value</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>public_ip_address</td>
-                        <td><?= ($public_data['public_ip']) ? $public_data['public_ip'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>private_ip_address</td>
-                        <td><?= ($local_data) ? $local_data : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>connection_type</td>
-                        <td><?= ($public_data['connection_type']) ? $public_data['connection_type'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>continent_name</td>
-                        <td><?= ($public_data['continent']) ? $public_data['continent'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>country_name</td>
-                        <td><?= ($public_data['country_name']) ? $public_data['country_name'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>city</td>
-                        <td><?= ($public_data['city']) ? $public_data['city'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>zipcode</td>
-                        <td><?= ($public_data['zipcode']) ? $public_data['zipcode'] : 'N/A' ?></td>
-                    </tr>
-                    <tr>
-                        <td>internet_service_provider</td>
-                        <td><?= ($public_data['organization']) ? $public_data['organization'] : 'N/A' ?></td>
-                    </tr>
-                </tbody>
+                <tbody id='client-data'></tbody>
             </table>
         </div>
     </div>
 </div>
 
-
 <div class="container text-center mt-3">
-    <h1 class="display-6 text-white">Network Details For Device: <?= gethostname() ?></h1>
+    <h1 class="display-6 text-white" id='browser'></h1>
 </div>
-
 
 <footer class="mt-5 text-white py-4">
     <div class="container text-center">
@@ -75,5 +40,6 @@
     </div>
 </footer>
 
+<script src="<?= base_url('js/data.js') ?>"></script>
 </body>
 </html>
