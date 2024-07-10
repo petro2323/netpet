@@ -14,9 +14,9 @@
     <a href="<?= base_url('/') ?>"><img src="<?= base_url('photos/logo.png') ?>"></a>
 </div>
 
-<div class="container mt-3 mb-2">
+<div class="container mt-2 mb-1">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <table class="table table-dark table-striped table-hover table-bordered">
                 <thead class="thead-light">
                     <tr>

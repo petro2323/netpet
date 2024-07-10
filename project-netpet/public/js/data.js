@@ -15,54 +15,30 @@ window.onload = async () => {
 
         let clients_data = await send.json()
 
-        let tableBody = document.getElementById('client-data')
+        let table_body = document.getElementById('client-data')
 
-        let html_view = `<tr>
-        <td>ip_address</td>
-        <td>${client_ip}</td>
-        </tr>
+        let data_map = {
+            'Ip Address': client_ip,
+            'Continent': clients_data.continent_name,
+            'Country': clients_data.country_name,
+            'Country Code': clients_data.country_code3,
+            'City': clients_data.city,
+            'Zipcode': clients_data.zipcode,
+            'Organization': clients_data.organization,
+            'Connection Type': clients_data.connection_type,
+            'Currency': clients_data.currency.code
+        }
 
-        <tr>
-        <td>continent_name</td>
-        <td>${clients_data.continent_name}</td>
-        </tr>
+        let html_view = ''
 
-        <tr>
-        <td>country_name</td>
-        <td>${clients_data.country_name}</td>
-        </tr>
+        for (let [key, value] of Object.entries(data_map)) {
+            html_view += `<tr>
+            <td>${key}</td>
+            <td>${value ? value : 'N/A'}</td>
+            </tr>`
+        }
 
-        <tr>
-        <td>country_code</td>
-        <td>${clients_data.country_code3}</td>
-        </tr> 
-        
-        <tr>
-        <td>city</td>
-        <td>${clients_data.city}</td>
-        </tr>
-
-        <tr>
-        <td>zipcode</td>
-        <td>${clients_data.zipcode}</td>
-        </tr>
-
-        <tr>
-        <td>internet_service_provider</td>
-        <td>${clients_data.organization}</td>
-        </tr>
-
-        <tr>
-        <td>connection_type</td>
-        <td>${clients_data.connection_type}</td>
-        </tr>
-
-        <tr>
-        <td>currency</td>
-        <td>${clients_data.currency.code}</td>
-        </tr>`
-
-        tableBody.innerHTML += html_view
+        table_body.innerHTML += html_view
 
     } catch (error) {
         console.log(error)
