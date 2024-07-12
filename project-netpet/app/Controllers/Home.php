@@ -19,7 +19,7 @@ class Home extends BaseController
         $client_ip = $this->request->getGet('ip');
 
         if ($client_ip) {
-            $apiKey = 'd345c82037b14905843f101a253728d5';
+            $apiKey = getenv('GEOLOCATION_API_KEY');
             $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=' . $apiKey . '&ip=' . $client_ip);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
