@@ -34,6 +34,10 @@
     <h1 class="display-6 text-white" id='browser'></h1>
 </div>
 
+<div class="container text-center">
+    <p class="text-white fs-5" id="get-ip-data"></p>
+</div>
+
 <footer class="mt-5 text-white py-4">
     <div class="container text-center">
         <p>&copy; 2024 NetPet v1.0 - <a href="<?= base_url('privacy') ?>" class="text-white">Privacy Policy</a></p>

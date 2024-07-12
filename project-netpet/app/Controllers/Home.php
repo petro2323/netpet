@@ -16,16 +16,31 @@ class Home extends BaseController
 
     public function fetch_ip_data()
     {
-        $input = $this->request->getJSON();
-        $client_ip = $input->ip;
+        $client_ip = $this->request->getGet('ip');
 
-        $apiKey = 'd345c82037b14905843f101a253728d5';
-        $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=' . $apiKey . '&ip=' . $client_ip);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        if ($client_ip) {
+            $apiKey = 'd345c82037b14905843f101a253728d5';
+            $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=' . $apiKey . '&ip=' . $client_ip);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        $response = curl_exec($ch);
-        curl_close($ch);
+            $response = curl_exec($ch);
+            curl_close($ch);
 
-        return $this->response->setJSON(json_decode($response, true));
+            $geo_info = json_decode($response, true);
+
+            $netpet_fetch = [
+                'ip_address' => $client_ip,
+                'continent_name' => $geo_info['continent_name'],
+                'country_name' => $geo_info['country_name'],
+                'country_code3' => $geo_info['country_code3'],
+                'city' => $geo_info['city'],
+                'zipcode' => $geo_info['zipcode'],
+                'organization' => $geo_info['organization'],
+                'connection_type' => $geo_info['connection_type'],
+                'currency_code' => $geo_info['currency']['code']
+            ];
+
+            return $this->response->setJSON($netpet_fetch);
+        }
     }
 }
