@@ -29,15 +29,15 @@ class Home extends BaseController
             $geo_info = json_decode($response, true);
 
             $netpet_fetch = [
-                'ip_address' => $client_ip,
-                'continent_name' => $geo_info['continent_name'],
-                'country_name' => $geo_info['country_name'],
-                'country_code3' => $geo_info['country_code3'],
-                'city' => $geo_info['city'],
-                'zipcode' => $geo_info['zipcode'],
-                'organization' => $geo_info['organization'],
-                'connection_type' => $geo_info['connection_type'],
-                'currency_code' => $geo_info['currency']['code']
+                'Ip Address' => $client_ip,
+                'Continent' => $geo_info['continent_name'],
+                'Country' => $geo_info['country_name'],
+                'Country Code' => $geo_info['country_code3'],
+                'City' => $geo_info['city'],
+                'Zipcode' => $geo_info['zipcode'],
+                'Organization' => $geo_info['organization'],
+                'Connection Type' => $geo_info['connection_type'],
+                'Currency' => $geo_info['currency']['code']
             ];
 
             return $this->response->setJSON($netpet_fetch);

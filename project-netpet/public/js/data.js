@@ -27,8 +27,6 @@ window.onload = async () => {
 
         table_body.innerHTML += html_view
 
-        let paragraph = document.getElementById('get-ip-data') //
-
     } catch (error) {
         console.log(error)
     }
