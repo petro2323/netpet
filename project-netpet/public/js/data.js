@@ -16,21 +16,9 @@ window.onload = async () => {
 
         let table_body = document.getElementById('client-data')
 
-        let data_map = {
-            'Ip Address': client_ip,
-            'Continent': clients_data.continent_name,
-            'Country': clients_data.country_name,
-            'Country Code': clients_data.country_code3,
-            'City': clients_data.city,
-            'Zipcode': clients_data.zipcode,
-            'Organization': clients_data.organization,
-            'Connection Type': clients_data.connection_type,
-            'Currency': clients_data.currency_code
-        }
-
         let html_view = ''
 
-        for (let [key, value] of Object.entries(data_map)) {
+        for (let [key, value] of Object.entries(clients_data)) {
             html_view += `<tr>
             <td>${key}</td>
             <td>${value ? value : 'N/A'}</td>
@@ -39,8 +27,7 @@ window.onload = async () => {
 
         table_body.innerHTML += html_view
 
-        let paragraph = document.getElementById('get-ip-data')
-        paragraph.textContent = `http://localhost:8080/ip-data?ip=${client_ip}`
+        let paragraph = document.getElementById('get-ip-data') //
 
     } catch (error) {
         console.log(error)
