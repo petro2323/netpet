@@ -41,6 +41,8 @@ class Home extends BaseController
             ];
 
             return $this->response->setJSON($netpet_fetch);
+        } else {
+            return $this->response->setStatusCode(404)->setBody('Failed to fetch ip address, client not found.');
         }
     }
 }
