@@ -14,11 +14,18 @@ class Home extends BaseController
         return view('privacy');
     }
 
+    public function error_view($message, $code)
+    {
+        $this->response->setStatusCode($code);
+
+        return view('error', ['message' => $message, 'status_code' => $code]);
+    }
+
     public function fetch_ip_data()
     {
         $client_ip = $this->request->getGet('ip');
 
-        if ($client_ip) {
+        if ($client_ip && preg_match('/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/', $client_ip)) {
             $apiKey = getenv('GEOLOCATION_API_KEY');
             $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=' . $apiKey . '&ip=' . $client_ip);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -42,7 +49,7 @@ class Home extends BaseController
 
             return $this->response->setJSON($netpet_fetch);
         } else {
-            return $this->response->setStatusCode(404)->setBody('Failed to fetch ip address, client not found.');
+            return $this->error_view('Client not found', 404);
         }
     }
 }
