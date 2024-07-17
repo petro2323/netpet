@@ -21,7 +21,7 @@ window.onload = async () => {
         for (let [key, value] of Object.entries(clients_data)) {
             html_view += `<tr>
             <td>${key}</td>
-            <td>${value ? value : 'N/A'}</td>
+            <td>${value}</td>
             </tr>`
         }
 
