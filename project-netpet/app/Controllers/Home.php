@@ -21,16 +21,11 @@ class Home extends BaseController
         $error = new Error();
 
         if ($client_ip && preg_match('/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/', $client_ip)) {
-            $apiKey = getenv('GEOLOCATION_API_KEY');
-            $ch = curl_init('https://api.ipgeolocation.io/ipgeo?apiKey=' . $apiKey . '&ip=' . $client_ip);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            
+            $loc_url = getenv('LOCATION_DATA') . $client_ip;
+            $location_data = $this->cURL($loc_url);
 
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $geo_info = json_decode($response, true);
-
-            array_walk($geo_info, function(&$value) {
+            array_walk($location_data, function(&$value) {
                 if ($value == '') {
                     $value = null;
                 }
@@ -38,14 +33,12 @@ class Home extends BaseController
 
             $netpet_fetch = [
                 'Ip Address' => $client_ip,
-                'Continent' => $geo_info['continent_name'] ?? 'N/A',
-                'Country' => $geo_info['country_name'] ?? 'N/A',
-                'Country Code' => $geo_info['country_code3'] ?? 'N/A',
-                'City' => $geo_info['city'] ?? 'N/A',
-                'Zipcode' => $geo_info['zipcode'] ?? 'N/A',
-                'Organization' => $geo_info['organization'] ?? 'N/A',
-                'Connection Type' => $geo_info['connection_type'] ?? 'N/A',
-                'Currency' => $geo_info['currency']['code'] ?? 'N/A'
+                'Country' => $location_data['country'] ?? 'N/A',
+                'Country Code' => $location_data['country_iso'] ?? 'N/A',
+                'City' => $location_data['city'] ?? 'N/A',
+                'Time Zone' => $location_data['time_zone'] ?? 'N/A',
+                'ISP' => $location_data['asn_org'] ?? 'N/A',
+                'Name Address' => $location_data['hostname'] ?? 'N/A'
             ];
 
             return $this->response->setJSON($netpet_fetch);
@@ -53,5 +46,16 @@ class Home extends BaseController
             $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
             return $error->error_message('Client not found', $this->response->getStatusCode());
         }
+    }
+
+    public function cURL($path)
+    {
+            $ch = curl_init($path);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return json_decode($response, true);
     }
 }
