@@ -1,6 +1,5 @@
 h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
 }
 
 body {
@@ -14,4 +13,8 @@ img {
 
 td {
     font-size: large;
+}
+
+#browser {
+    font-size: 1rem;
 }
