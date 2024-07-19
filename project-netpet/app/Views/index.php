@@ -31,7 +31,7 @@
 </div>
 
 <div class="container text-center mt-3">
-    <h1 class="display-6 text-white" id='browser'></h1>
+    <h1 class="text-white" id='browser'></h1>
 </div>
 
 <footer class="mt-5 text-white py-4">

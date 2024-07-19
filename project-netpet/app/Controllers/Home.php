@@ -18,7 +18,6 @@ class Home extends BaseController
     public function fetch_ip_data()
     {
         $client_ip = $this->request->getGet('ip');
-        $error = new Error();
 
         if ($client_ip && preg_match('/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/', $client_ip)) {
             
@@ -43,7 +42,10 @@ class Home extends BaseController
 
             return $this->response->setJSON($netpet_fetch);
         } else {
+            
+            $error = new Error();
             $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
+            
             return $error->error_message('Client not found', $this->response->getStatusCode());
         }
     }
