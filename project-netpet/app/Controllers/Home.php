@@ -17,10 +17,10 @@ class Home extends BaseController
 
     public function fetch_ip_data()
     {
-        $client_ip = $this->request->getGet('ip');
-
-        if ($client_ip && preg_match('/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/', $client_ip)) {
+        if ($this->request->getHeader('X-Requested-With') && $this->request->getHeader('X-Requested-With')->getValue() === 'XMLHttpRequest') {
             
+            $client_ip = $this->request->getGet('ip');
+
             $loc_url = getenv('LOCATION_DATA') . $client_ip;
             $location_data = $this->cURL($loc_url);
 
@@ -44,9 +44,9 @@ class Home extends BaseController
         } else {
             
             $error = new Error();
-            $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
-            
-            return $error->error_message('Client not found', $this->response->getStatusCode());
+            $this->response->setStatusCode(Response::HTTP_UNAUTHORIZED);
+
+            return $error->error_message('Access Denied', $this->response->getStatusCode());
         }
     }
 

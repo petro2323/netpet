@@ -8,7 +8,8 @@ window.onload = async () => {
         let send = await fetch(`/ip-data?ip=${client_ip}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
             }
         })
 
