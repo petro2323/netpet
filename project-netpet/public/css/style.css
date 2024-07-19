@@ -18,3 +18,9 @@ td {
 #browser {
     font-size: 1rem;
 }
+
+.button, .accordion-item {
+    background-color: #28242c;
+    color: white;
+    border: 1px solid gray;
+}
