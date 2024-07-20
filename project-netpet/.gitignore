@@ -132,5 +132,5 @@ node_modules/
 gulpfile.js
 
 # Javascript Files
-public/js/*.js
+public/js/data.js
 
