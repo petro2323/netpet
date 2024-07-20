@@ -40,6 +40,6 @@
     </div>
 </footer>
 
-<script src="<?= base_url('js/data.js') ?>"></script>
+<script src="<?= base_url('js/source/data.js') ?>"></script>
 </body>
 </html>

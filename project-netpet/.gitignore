@@ -124,3 +124,13 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
+
+# Node modules
+node_modules/
+
+# Obfuscator
+gulpfile.js
+
+# Javascript Files
+public/js/*.js
+
