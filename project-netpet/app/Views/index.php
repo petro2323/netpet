@@ -14,6 +14,12 @@
     <a href="<?= base_url('/') ?>"><img src="<?= base_url('photos/logo.png') ?>"></a>
 </div>
 
+<div class="loading">
+    <div class="spinner-border text-light" role="status">
+        <span class="sr-only"></span>
+    </div>
+</div>
+
 <div class="container mt-2 mb-1">
     <div class="row justify-content-center">
         <div class="col-md-7">
